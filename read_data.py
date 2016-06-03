@@ -4,10 +4,12 @@ import matplotlib.pyplot as plt
 
 # Load the data
 # See http://docs.scipy.org/doc/numpy/user/basics.io.genfromtxt.html
-data = np.genfromtxt('text_data.txt', delimiter=',')
+data = np.loadtxt('text_data.txt', delimiter=',')
 
 # Examine data
 print(data.shape)
+xdata = data[:,0]
+ydata = data[:,1]
 plt.plot(data[:, 0], data[:, 1], color='blue', marker='o', linestyle='')
 
 
@@ -15,7 +17,7 @@ plt.plot(data[:, 0], data[:, 1], color='blue', marker='o', linestyle='')
 coeff = np.polyfit(data[:, 0], data[:, 1], 2)
 print(coeff)  # coefficients of the fit
 
-xdata = np.sort(data[:, 0])  # for convenience in plotting
+
 plt.plot(xdata, coeff[2] + coeff[1] * xdata + coeff[0] * xdata**2, color='red', marker='', linestyle='-')
 
 
@@ -34,12 +36,19 @@ print(cov)  # Covariance of parameters
 perr = np.sqrt(np.diag(cov))
 print(perr)  # Standard deviation errors from diagonal of covariance matrix
 
-plt.plot(xdata, myfunction(xdata, *res), color='green', marker='', linestyle='--', lw=2)
+xdata2 = np.sort(data[:, 0])  # for convenience in plotting
+
+plt.plot(data[:, 0], data[:, 1], color='blue', marker='o', linestyle='')
+plt.plot(xdata2, myfunction(xdata2, *res), color='green', marker='', linestyle='--', lw=2)
+
 
 # Save results
 f = open('results.txt', 'w')
 f.write(res)
 f.close()
+
+with open('results.txt','w') as f:
+    f.write(str(res[:]) + '\n')
 # Examine file: what is wrong?
 
 # Try a diferent way:
@@ -56,5 +65,6 @@ with open('results2.txt', 'w') as f:
 # Python pickles
 import pickle
 pickle.dump(res, open('results.pkl', 'w'))
-# Can then load with res = pickle.load(open('results.pkl', 'r'))
+# Can then load with
+new_res = pickle.load(open('results.pkl', 'r'))
 
