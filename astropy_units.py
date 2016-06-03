@@ -13,9 +13,6 @@ time = time.to(u.year)
 
 print(time)
 
-print('The amount of time (in {0}) to travel '
-      '{1.value} {1.unit} is {2:.0f} ({2:.3g})'.format(time.unit, distance, time.value))
-
 from astropy import constants as const
 
 print(const.c)

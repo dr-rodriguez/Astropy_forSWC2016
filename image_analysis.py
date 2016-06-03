@@ -39,16 +39,7 @@ histogram = plt.hist(image_data.flatten(), NBINS)
 plt.show()
 
 plt.imshow(image_data, cmap='gray', norm=LogNorm())
-#plt.savefig('horsehead.png')
-
-# I chose the tick marks based on the histogram above
-# cbar = plt.colorbar(ticks=[5.e3,1.e4,2.e4])
-# cbar.ax.set_yticklabels(['5,000','10,000','20,000'])
-
-# Log normal
-plt.imshow(image_data, cmap='gray', norm=LogNorm())
-cbar = plt.colorbar(ticks=[5.e3,1.e4,2.e4])
-cbar.ax.set_yticklabels(['5,000','10,000','20,000'])
+plt.savefig('horsehead.png')
 
 # Image Stacking
 image_list = [download_file('http://data.astropy.org/tutorials/FITS-images/M13_blue_000' + n + '.fits', cache=True) \
@@ -62,7 +53,7 @@ for image in image_list:
 final_image = np.zeros(shape=image_concat[0].shape)
 
 for image in image_concat:
-    final_image += image  # final_image = final_image + image
+    final_image += image  #  This is the same as final_image = final_image + image
 
 plt.hist(final_image.flatten(), 1000)
 

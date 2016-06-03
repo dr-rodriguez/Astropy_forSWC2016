@@ -12,7 +12,6 @@ import matplotlib.pyplot as plt
 plt.plot(t['x'], t['y'], marker='o', linestyle='')
 plt.show()
 
-from astropy import units as u
 t['x']
 t['x'][2]
 t[2]
